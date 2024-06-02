@@ -2,8 +2,8 @@ pipeline {
     agent any
     
     environment {
-        DOCKER_IMAGE_NAME = Dockerfile
-        CONTAINER_NAME = Jenkins
+        DOCKER_IMAGE_NAME = 'Dockerfile'
+        CONTAINER_NAME = 'Jenkins'
     }
     
     stages {
