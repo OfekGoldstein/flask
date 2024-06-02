@@ -1,12 +1,17 @@
 pipeline {
     agent any
     
+    environment {
+        DOCKER_IMAGE_NAME = Dockerfile
+        CONTAINER_NAME = Jenkins
+    }
+    
     stages {
         stage('Build') {
             steps {
                 // Build Docker image
                 script {
-                    docker.build 'your_docker_image_name'
+                    docker.build DOCKER_IMAGE_NAME
                 }
             }
         }
@@ -17,9 +22,6 @@ pipeline {
                 script {
                     sh 'echo "Running tests..."'
                     // Add your custom test commands here
-                    // For example, you can run unit tests for your application
-                    // e.g., npm test for a Node.js application
-                    // or python -m unittest for a Python application
                 }
             }
         }
@@ -30,8 +32,6 @@ pipeline {
                 script {
                     sh 'echo "Deploying application..."'
                     // Add your custom deployment commands here
-                    // For example, you can deploy the Docker image to a server
-                    // e.g., docker push to a Docker registry
                 }
             }
         }
