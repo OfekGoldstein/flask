@@ -1,12 +1,9 @@
 pipeline {
     agent any
     
-    environment {
-        // Define environment variables
-        DOCKER_IMAGE_NAME = 'your_docker_image_name'
-        CONTAINER_NAME = 'your_container_name'
-    }
-    
+    // Import Docker global variable
+    import org.jenkinsci.plugins.docker.workflow.*
+
     stages {
         stage('Build') {
             steps {
@@ -19,29 +16,22 @@ pipeline {
         
         stage('Test') {
             steps {
-                // Run tests (e.g., using a testing framework or tools)
-                script {
-                    sh 'echo "Running tests..."'
-                    // Example: run unit tests for your Flask application
-                    sh 'python -m unittest discover tests'
-                }
+                // Run tests
+                // Add your test steps here
             }
         }
         
         stage('Deploy') {
             steps {
-                // Deploy the website
-                script {
-                    // Start Docker container with the built image
-                    docker.image(DOCKER_IMAGE_NAME).run('-p 80:80', '--name', CONTAINER_NAME)
-                }
+                // Deploy the application
+                // Add your deployment steps here
             }
         }
     }
     
     post {
         always {
-            // Clean up resources after the pipeline run
+            // Clean up resources
             script {
                 // Stop and remove Docker container
                 docker.stop(CONTAINER_NAME)
