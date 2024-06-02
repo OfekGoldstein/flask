@@ -4,8 +4,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                // Build Docker image
                 script {
-                    // Build Docker image
                     docker.build 'your_docker_image_name'
                 }
             }
@@ -20,10 +20,8 @@ pipeline {
         
         stage('Deploy') {
             steps {
-                script {
-                    // Deploy the application
-                    // Add your deployment steps here
-                }
+                // Deploy the application
+                // Add your deployment steps here
             }
         }
     }
