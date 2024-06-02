@@ -1,15 +1,12 @@
 pipeline {
     agent any
     
-    // Import Docker global variable
-    import org.jenkinsci.plugins.docker.workflow.*
-
     stages {
         stage('Build') {
             steps {
-                // Build Docker image
                 script {
-                    docker.build DOCKER_IMAGE_NAME
+                    // Build Docker image
+                    docker.build 'your_docker_image_name'
                 }
             }
         }
@@ -23,16 +20,18 @@ pipeline {
         
         stage('Deploy') {
             steps {
-                // Deploy the application
-                // Add your deployment steps here
+                script {
+                    // Deploy the application
+                    // Add your deployment steps here
+                }
             }
         }
     }
     
     post {
         always {
-            // Clean up resources
             script {
+                // Clean up resources
                 // Stop and remove Docker container
                 docker.stop(CONTAINER_NAME)
                 docker.remove(CONTAINER_NAME)
